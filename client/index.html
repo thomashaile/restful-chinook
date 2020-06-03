@@ -1,18 +1,71 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <title>courses web-app</title>
-
-  <link rel="stylesheet" href="./style.css">
-
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Artist</title>
+    <style>
+        label,
+        input,
+        output {
+            display: block;
+        }
+    </style>
+    <script type="module">
+        import { init } from './app/init.js'; window.onload = init;
+    </script>
+    <link rel="stylesheet" href="./app/style.css">
+    <script src="./controller.js"></script>
 </head>
 
 <body>
-  <div id='root'></div>
+    <div id="container">
+        <form>
+            <h1>Artist Info</h1>
+            <label for="artist">Artist Id:</label>
+            <input id="artistid" name="artistid" type="search" placeholder="Artist id" required />
+            <button type="submit" id="artist_search" class="primary-button">Search</button>
+            <button type="submit" id="artist_delete" class="primary-button">Delete</button>
 
-  <script src='./app/init.js'></script>
+        </form>
+        <hr>
+        <button type="submit" id="albums" class="second-button">Display Albums</button>
+        <button type="submit" id="tracks" class="second-button">Display Tracks</button>
+        <button type="submit" id="playlists" class="second-button">Display Playlists</button>
+        <button type="submit" id="mediatypes" class="second-button">Media-Type</button>
+
+    </div>
+    <div id="root">
+
+    </div>
+
 </body>
+<script>
+    //event listeners for artist form
+    document.getElementById("artist_search")
+        .addEventListener('click', (e) => {
+            const artistId = document.getElementById('artistid').value;
+            if (!artistId) {
+                alert("Artist id is required");
+            }
+            artistSearch(artistId);
+            e.preventDefault()
+        });
+    document.getElementById("artist_delete")
+        .addEventListener('click', (e) => {
+            const artistId = document.getElementById('artistid').value;
+            if (!artistId) {
+                alert("Artist id is required");
+            }
+            artistDelete(artistId);
+            e.preventDefault()
+        });
+    //adding other buttons event listener
+    document.getElementById("albums").addEventListener("click", viewAlbums);
+    document.getElementById("playlists").addEventListener("click", viewPlaylists);
+    document.getElementById("mediatypes").addEventListener("click", viewMediatypes);
+    document.getElementById("tracks").addEventListener("click", viewTracks);
+</script>
 
 </html>
